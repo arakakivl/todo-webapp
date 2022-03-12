@@ -3,7 +3,7 @@ using ToDoApi.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IItemsRepository, InMemItemsRepository>();
-builder.Services.AddControllers();
+builder.Services.AddMvc();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
