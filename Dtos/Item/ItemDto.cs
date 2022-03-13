@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ToDoApi.Dtos.Item
 {
     public record ItemDto
@@ -9,7 +11,7 @@ namespace ToDoApi.Dtos.Item
 
         public bool IsComplete { get; init; }
 
-        public DateTime CompleteUntil { get; init; }
-        public DateTime CreatedAt { get; init; }
+        public string? CompleteUntil { get; init; }
+        public string? CreatedAt { get; init; }
     }
 }
