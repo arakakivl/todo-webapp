@@ -7,7 +7,7 @@
 }
 
 html {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 body {
@@ -31,7 +31,7 @@ main {
     border-radius: 7px;
 
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 
 .todo-container:hover {
@@ -67,11 +67,27 @@ main {
     border-radius: 0px 7px 7px 0px;
 }
 
+.todo-main-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.todo-main-header > h2 {
+    word-wrap: break-word;
+}
+
+
 .todo-main-desc {
+    word-wrap: break-word;
     font-size: 0.8rem;
 }
 
 @media only screen and (min-width: 768px) {
+    html {
+        font-size: 25px;
+    }
+
     main {
         width: 60%;
     }
