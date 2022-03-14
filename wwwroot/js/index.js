@@ -24,6 +24,7 @@ async function getItems() {
             let completeUntil = document.createElement('h2');
             let desc = document.createElement('p');
             let checkInput = document.createElement('input');
+            let updateButton = document.createElement('img');
             let deleteButton = document.createElement('img');
 
             // Adding classes
@@ -55,6 +56,9 @@ async function getItems() {
                 completeUntil.innerHTML = 'Feito!';
             }
 
+            updateButton.src = '../assets/pencil-edit-button-svgrepo-com.svg';
+            updateButton.width = 20;
+
             deleteButton.src = '../assets/icons8-trash.svg';
             deleteButton.width = 25;
 
@@ -72,16 +76,30 @@ async function getItems() {
                 }
             });
 
-            deleteButton.addEventListener('click', async function() {
-                await deleteToDo(data[i].id);
-                todoContainer.style.opacity = 0;
+            // EventListener for update button
 
-                await sleep(500);
-                todoContainer.remove();
+            deleteButton.addEventListener('click', async function() {
+                if (!checkInput.checked) {
+                    if (confirm('Quer mesmo deletá-lo?')) {
+                        await deleteToDo(data[i].id);
+    
+                        todoContainer.style.opacity = 0;
+    
+                        await sleep(500);
+                        todoContainer.remove();
+                    }
+                }
+                else {
+                    await deleteToDo(data[i].id);
+    
+                    todoContainer.style.opacity = 0;
+
+                    await sleep(500);
+                    todoContainer.remove();
+                }
             });
             
             // Appending childs
-
             todoDates.appendChild(created);
             todoDates.appendChild(completeUntil);
 
@@ -89,6 +107,8 @@ async function getItems() {
             todoHeader.appendChild(todoDates);
 
             todoDesc.appendChild(desc);
+
+            todoButtons.appendChild(updateButton);
             todoButtons.appendChild(deleteButton);
 
             todoAside.appendChild(checkInput);
@@ -120,11 +140,9 @@ async function checkToDo(itemId, checked) {
 }
 
 async function deleteToDo(itemId) {
-    if (confirm('Quer mesmo deletá-lo?')) {
-        await fetch("/api/items/" + itemId, {
-            method: "DELETE"
-        });
-    }
+    await fetch("/api/items/" + itemId, {
+        method: "DELETE"
+    });
 }
 
 getItems();
