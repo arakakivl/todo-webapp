@@ -10,12 +10,12 @@ async function getItems() {
         for(let i = 0; i < data.length; i++) {
 
             // Declaring todoItem html element
-            let todoContainer = document.createElement('div');
-            let todoAside = document.createElement('div');
-            let todoMain = document.createElement('div');
-            let todoHeader = document.createElement('div');
-            let todoDates = document.createElement('div'); // hgroup quando refatorando para novas tags
-            let todoDesc = document.createElement('div');
+            let todoContainer = document.createElement('article');
+            let todoAside = document.createElement('section');
+            let todoMain = document.createElement('section');
+            let todoHeader = document.createElement('header');
+            let todoDates = document.createElement('section');
+            let todoDesc = document.createElement('section');
 
             let title = document.createElement('h1');
             let created = document.createElement('h2');
