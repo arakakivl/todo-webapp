@@ -71,14 +71,25 @@ main {
     flex-wrap: wrap;
 }
 
-.todo-main-header > section > h2 {
-    word-wrap: break-word;
-    font-size: 0.8rem;
+.todo-main-header > section {
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .todo-main-desc {
-    word-wrap: break-word;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+}
+
+.todo-main-header > section > h2 {
+    font-size: 0.6rem;
+}
+
+.todo-main-buttons {
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+
+    height: 50px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -96,5 +107,21 @@ main {
 
     .todo-main {
         width: 92%;
+    }
+
+    .todo-main-header > section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+
+@media only screen and (min-width: 750px) and (max-width: 1220px) {
+    .todo-main-header > section {
+        display: block;
     }
 }
