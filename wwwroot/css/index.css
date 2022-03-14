@@ -12,8 +12,36 @@ html {
 
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+
+    padding: 20px;
+}
+
+body > header {
+    text-align: center;
+}
+
+#newItem {
+    padding: 5px;
+
+    position: fixed;
+
+    right: 2vw;
+    bottom: 2vh;
+
+    border: solid 1px;
+    border-radius: 5px;
+
+    background-color: rgb(127, 255, 212);
+}
+
+#newItem:active {
+    background-color: rgb(77, 205, 162);
+}
+
+#newItem > img {
+    width: 20px;
 }
 
 main {
@@ -31,7 +59,9 @@ main {
     border-radius: 7px;
 
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
     transition: transform 0.2s;
+    transition: opacity 0.5s;
 }
 
 .todo-container:hover {
@@ -77,11 +107,11 @@ main {
 }
 
 .todo-main-desc {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .todo-main-header > section > h2 {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
 }
 
 .todo-main-buttons {
@@ -94,19 +124,27 @@ main {
 
 @media only screen and (min-width: 768px) {
     html {
-        font-size: 25px;
+        font-size: 20px;
     }
 
     main {
         width: 60%;
     }
 
+    #newItem {
+        padding: 15px; 
+    }
+
+    #newItem > img {
+        width: 30px;
+    }
+
     .todo-aside {
-        width: 8%;
+        width: 13%;
     }
 
     .todo-main {
-        width: 92%;
+        width: 87%;
     }
 
     .todo-main-header > section {

@@ -24,12 +24,7 @@ async function getItems() {
             let completeUntil = document.createElement('h2');
             let desc = document.createElement('p');
             let checkInput = document.createElement('input');
-            
-            // Extra
-
             let deleteButton = document.createElement('img');
-            deleteButton.src = '../assets/icons8-trash.svg';
-            deleteButton.width = 25;
 
             // Adding classes
             todoContainer.classList += 'todo-container';
@@ -43,22 +38,25 @@ async function getItems() {
             title.innerHTML = data[i].title;
 
             let descriptionn = data[i].description;
-            if (descriptionn.length > 80) {
-                descriptionn = descriptionn.substring(0, 55) + " (...)";
+            if (descriptionn.length > 125) {
+                descriptionn = descriptionn.substring(0, 125) + " (...)";
             }
 
             desc.innerHTML = descriptionn;
+
             created.innerHTML = "Criado em: " + data[i].createdAt;
             completeUntil.innerHTML = "Completar até: " + data[i].completeUntil;
 
             checkInput.type = 'checkbox';
 
-            if (data[i].isComplete)
-            {
+            if (data[i].isComplete) {
                 checkInput.checked = true;
                 title.style.textDecoration = 'line-through';
                 completeUntil.innerHTML = 'Feito!';
             }
+
+            deleteButton.src = '../assets/icons8-trash.svg';
+            deleteButton.width = 25;
 
             // Events Listeners
             checkInput.addEventListener('change', async function() {
@@ -76,6 +74,9 @@ async function getItems() {
 
             deleteButton.addEventListener('click', async function() {
                 await deleteToDo(data[i].id);
+                todoContainer.style.opacity = 0;
+
+                await sleep(500);
                 todoContainer.remove();
             });
             
@@ -104,6 +105,10 @@ async function getItems() {
             allItems.push(data[i]); // JUST FOR DEVELOPMENT PURPOSES
         }
      });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function checkToDo(itemId, checked) {
