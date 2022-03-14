@@ -42,9 +42,23 @@ async function getItems() {
             created.innerHTML = "Criado em: " + data[i].createdAt;
             completeUntil.innerHTML = "Completar até: " + data[i].completeUntil;
 
-            checkInput.type = 'checkbox';
-            checkInput.checked = data[i].isComplete;
+            checkInput.addEventListener('change', async function() {
+                await checkToDo(data[i].id, checkInput.checked);
+                if (checkInput.checked) {
+                    title.style.textDecoration = 'line-through';
+                }
+                else {
+                    title.style.textDecoration = '';
+                }
+            });
 
+            checkInput.type = 'checkbox';
+            if (data[i].isComplete)
+            {
+                checkInput.checked = true;
+                title.style.textDecoration = 'line-through';
+            }
+            
             todoHeader.appendChild(title);
             todoDates.appendChild(created);
             todoDates.appendChild(completeUntil);
@@ -61,9 +75,17 @@ async function getItems() {
 
             itemsArea.appendChild(todoContainer);
 
-            allItems.push(data[i]);
+            allItems.push(data[i]); // THIS
         }
      });
+}
+
+async function checkToDo(itemId, checked) {
+    await fetch("/api/items/" + itemId + "/check", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({isComplete: checked})
+    });
 }
 
 getItems();

@@ -82,5 +82,22 @@ namespace ToDoApi.Controllers
             _repo.Delete(id);
             return NoContent();
         }
+
+        // Patch -> /api/items/id/check
+        [HttpPatch("{id}/check")]
+        public ActionResult PatchCheckItem(Guid id, CheckItemDto checkItem)
+        {
+            var toCheckOrUncheck = _repo.Get(id);
+            if (toCheckOrUncheck is null)
+                return NotFound();
+            
+            var itemTo = toCheckOrUncheck with
+            {
+                IsComplete = checkItem.IsComplete
+            };
+
+            _repo.Update(id, itemTo);
+            return NoContent();
+        }
     }
 }
