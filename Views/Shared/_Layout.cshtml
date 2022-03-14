@@ -15,7 +15,15 @@
             <h1>ToDoList</h1>
             <p>Organize-se e aproveite mais o tempo da sua vida!</p>
         </header>
-        
+
+        <nav>
+            <ul>
+                <li onclick="getAllItems()">Todos</li>
+                <li onclick="getUncompletedItems()">Incompletos</li>
+                <li onclick="getCompletedItems()">Completos</li>
+            </ul>
+        </nav>
+
         <main>
             @RenderBody()
         </main>

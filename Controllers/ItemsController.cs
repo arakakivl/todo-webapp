@@ -51,6 +51,20 @@ namespace ToDoApi.Controllers
             return _repo.GetAll().Select(x => x.AsDto());
         }
 
+        // GET => /api/items/uncompleted
+        [HttpGet("uncompleted")]
+        public IEnumerable<ItemDto> GetUncompleted()
+        {
+            return _repo.GetAll().Select(x => x.AsDto()).ToList().FindAll(x => !x.IsComplete);
+        }
+
+        // GET => /api/items/completed
+        [HttpGet("completed")]
+        public IEnumerable<ItemDto> GetCompleted()
+        {
+            return _repo.GetAll().Select(x => x.AsDto()).ToList().FindAll(x => x.IsComplete);
+        }
+
         // PUT => /api/items/id
         [HttpPut("{id}")]
         public ActionResult Put(Guid id, UpdateItemDto updatedInfo)
