@@ -1,4 +1,36 @@
-@section Styles 
+@section Styles
 {
     <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/css/newItemModal.css">
 }
+
+<section id="modalBackground" class="modal-background">
+    <section id="modalContainer" class="modal-container">
+        <header>
+            <h1>Nova Tarefa</h1>
+            <div onclick="closeModal()">&times;</div>
+        </header>
+
+        <section id="modalForm" class="modal-form">
+            <section class="modal-form-input">
+                <label for="inputTitle">Título:</label>
+                <input id="inputTitle" type="text">
+            </section>
+
+            <section class="modal-form-input">
+                <label for="inputDescription">Descrição:</label>
+                <input id="inputDescription">
+            </section>
+
+            <section class="modal-form-input">
+                <label for="inputDate">Completar até:</label>
+                <input id="inputDate" type="date">
+            </section>
+
+            <button onclick="postNewItem()">Criar!</button>
+        </section>
+    </section>
+</section>
+
+<section id="itemsArea" class="items-area">
+</section>

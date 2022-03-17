@@ -6,6 +6,7 @@ namespace ToDoApi.Controllers
     [Route("/")]
     public class HomeController : Controller
     {
+        [HttpGet]
         [Route("")]
         public IActionResult Index()
         {

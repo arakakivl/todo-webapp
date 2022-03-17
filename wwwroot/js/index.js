@@ -1,5 +1,7 @@
 const mainApiUrl = '/api/items';
-const itemsArea = $('main')[0];
+const itemsArea = document.getElementById('itemsArea');
+const newItemButton = document.getElementById('newItem');
+const modal = document.getElementById('modalBackground');
 
 async function getItems(url) {
     itemsArea.innerHTML = '';
@@ -106,34 +108,33 @@ async function putItemInItemsArea(items) {
             if (checkInput.checked) {
                 title.style.textDecoration = 'line-through';
                 completeUntil.innerHTML = 'Feito!';
+
+                if ($('body > nav > ul > li')[1].style.color == 'red') {
+                    await removeToDo(todoContainer);
+                }
             }
             else {
                 title.style.textDecoration = '';
                 completeUntil.innerHTML =
-                    completeUntil.innerHTML = "Completar até: " + item.completeUntil;
+                completeUntil.innerHTML = "Completar até: " + item.completeUntil;
+                
+                if ($('body > nav > ul > li')[2].style.color == 'red') {
+                    await removeToDo(todoContainer);
+                }
             }
         });
 
         // EventListener for update button
-
         deleteButton.addEventListener('click', async function () {
             if (!checkInput.checked) {
                 if (confirm('Quer mesmo deletá-lo?')) {
                     await deleteToDo(item.id);
-
-                    todoContainer.style.opacity = 0;
-
-                    await sleep(500);
-                    todoContainer.remove();
+                    await removeToDo(todoContainer);
                 }
             }
             else {
                 await deleteToDo(item.id);
-
-                todoContainer.style.opacity = 0;
-
-                await sleep(500);
-                todoContainer.remove();
+                await removeToDo(todoContainer);
             }
         });
 
@@ -166,6 +167,13 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function removeToDo(item) {
+    item.style.opacity = 0;
+
+    await sleep(500);
+    item.remove();
+}
+
 async function checkToDo(itemId, checked) {
     await fetch("/api/items/" + itemId + "/check", {
         method: "PATCH",
@@ -180,4 +188,45 @@ async function deleteToDo(itemId) {
     });
 }
 
+function newItem() {
+    newItemButton.style.display = 'none';
+    modal.style.display = 'flex';
+}
+
+
+function closeModal() {
+    document.getElementById('inputTitle').value = "";
+    document.getElementById('inputDescription').value = "";
+    document.getElementById('inputDate').value = "";
+
+    newItemButton.style.display = 'block';
+    modal.style.display = 'none';
+}
+
+async function postNewItem() {
+    let completeUntil;
+    let item;
+
+    try {
+        completeUntil = new Date(document.getElementById('inputDate').value);
+        item = { "title": document.getElementById('inputTitle').value, "description": document.getElementById('inputDescription').value, "completeUntil": completeUntil.toISOString() };
+    } catch {
+        alert("Houve um erro. Verifique se a data está preenchida corretamente.");
+        return;
+    }
+
+    await fetch("/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", accept: "text/plain" },
+        body: JSON.stringify(item)
+    })
+    .then(x => {
+        if (!x.ok) { throw Error(); } else { closeModal(); }
+    })
+    .catch(y => {
+        alert("Houve algum erro. Por favor, verifique se o título está devidamente preenchido ou se não é muito grande.");
+    })
+}
+
 getAllItems()
+

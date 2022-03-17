@@ -24,7 +24,7 @@ namespace ToDoApi.Controllers
                 Id = Guid.NewGuid(),
                 Title = item.Title,
                 Description = item.Description,
-                IsComplete = item.IsComplete,
+                IsComplete = false,
                 CompleteUntil = item.CompleteUntil,
                 CreatedAt = DateTime.Today
             };
