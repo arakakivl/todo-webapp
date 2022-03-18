@@ -116,7 +116,7 @@ async function putItemInItemsArea(items) {
             else {
                 title.style.textDecoration = '';
                 completeUntil.innerHTML =
-                completeUntil.innerHTML = "Completar até: " + item.completeUntil;
+                completeUntil.innerHTML = "Completar até: " + (new Date(item.completeUntil)).getDay;
                 
                 if ($('body > nav > ul > li')[2].style.color == 'red') {
                     await removeToDo(todoContainer);
@@ -124,7 +124,10 @@ async function putItemInItemsArea(items) {
             }
         });
 
-        // EventListener for update button
+        updateButton.addEventListener('click', function() {
+            putItemModal(item.id);
+        });
+        
         deleteButton.addEventListener('click', async function () {
             if (!checkInput.checked) {
                 if (confirm('Quer mesmo deletá-lo?')) {
@@ -188,11 +191,34 @@ async function deleteToDo(itemId) {
     });
 }
 
-function newItem() {
+function showModal() {
+    document.getElementById('btnPostItem').style.display = 'none';
+    document.getElementById('btnPutItem').style.display = 'none';
+
     newItemButton.style.display = 'none';
     modal.style.display = 'flex';
 }
 
+function postItemModal() {
+    showModal();
+    document.getElementById('btnPostItem').style.display = 'block';
+}
+
+async function putItemModal(id) {
+    let itemm;
+    itemm = await fetch('api/items/' + id).then(response => response.json()).then(data => { return data; }) ;
+
+    document.getElementById('inputTitle').value = itemm.title;
+    document.getElementById('inputDescription').value = itemm.description;
+
+    let date = new Date(itemm.completeUntil);
+    document.getElementById('inputDate').valueAsDate = date;
+
+    showModal();
+    document.getElementById('btnPutItem').style.display = 'block';
+
+    document.getElementById('btnPutItem').addEventListener('click', function() { putItem(id) });
+}
 
 function closeModal() {
     document.getElementById('inputTitle').value = "";
@@ -203,30 +229,62 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-async function postNewItem() {
+function returnItemFromForm() {
     let completeUntil;
     let item;
 
     try {
         completeUntil = new Date(document.getElementById('inputDate').value);
-        item = { "title": document.getElementById('inputTitle').value, "description": document.getElementById('inputDescription').value, "completeUntil": completeUntil.toISOString() };
+        item = { title: document.getElementById('inputTitle').value, "description": document.getElementById('inputDescription').value, "completeUntil": completeUntil.toISOString() };
+
+        return item;
     } catch {
         alert("Houve um erro. Verifique se a data está preenchida corretamente.");
         return;
     }
+}
+
+async function postNewItem() {
+    let item = returnItemFromForm();
 
     await fetch("/api/items", {
         method: "POST",
-        headers: { "Content-Type": "application/json", accept: "text/plain" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(item)
     })
     .then(x => {
-        if (!x.ok) { throw Error(); } else { closeModal(); }
+        if (!x.ok) { 
+            throw Error(); 
+        } else { 
+            closeModal(); 
+        }
     })
     .catch(y => {
         alert("Houve algum erro. Por favor, verifique se o título está devidamente preenchido ou se não é muito grande.");
+    });
+}
+
+async function putItem(id) {
+    let item = returnItemFromForm();
+    item.id = id;
+
+    await fetch('/api/items/' + id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
     })
+    .then(x => {
+        if (!(x.status.valueOf() == "204")) { 
+            throw Error(); 
+        }  else { 
+            closeModal();
+            let oldBtnWithEventListener = document.getElementById('btnPutItem');
+            oldBtnWithEventListener.replaceWith(oldBtnWithEventListener.cloneNode(true));
+        }
+    })
+    .catch(y => {
+        alert("Houve algum erro. Por favor, verifique se o título está devidamente preenchido ou se não é muito grande.");
+    });
 }
 
 getAllItems()
-

@@ -1,17 +1,12 @@
-/* Modal */
 .modal-background {
-    /* colors */
     background-color: rgba(0, 0, 0, 0.8);
 
-    /* (x, y) */
     position: fixed;
     top: -1px;
 
-    /* width and height */
     width: 100%;
     height: 100vh;
 
-    /* display */
     display: none;
     align-items: center;
     justify-content: center;
@@ -20,16 +15,12 @@
 }
 
 .modal-container {
-    /* colors */
     background-color: white;
 
-    /* padding */
     padding: 20px;
 
-    /* border */
     border-radius: 10px;
-
-    /* width and height */
+    
     max-width: 90%;
 }
 
@@ -74,7 +65,7 @@
 
 .modal-form > button {
     width: 60%;
-    height: 40px;
+    height: 50px;
 
     border: solid 1px;
     border-radius: 30px;
@@ -92,5 +83,9 @@
 @media only screen and (min-width: 768px) {
     .modal-container {
         width: 50%;
+    }
+
+    .modal-form > button {
+        width: 40%;
     }
 }

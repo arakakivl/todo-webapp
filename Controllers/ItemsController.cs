@@ -77,7 +77,6 @@ namespace ToDoApi.Controllers
             {
                 Title = updatedInfo.Title,
                 Description = updatedInfo.Description,
-                IsComplete = updatedInfo.IsComplete,
                 CompleteUntil = updatedInfo.CompleteUntil,
             };
 

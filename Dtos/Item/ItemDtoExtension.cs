@@ -14,8 +14,8 @@ namespace ToDoApi.Dtos.Item
                 Title = item.Title,
                 Description = item.Description,
                 IsComplete = item.IsComplete,
-                CompleteUntil = completeUntil,
-                CreatedAt = createdAt
+                CompleteUntil = item.CompleteUntil,
+                CreatedAt = item.CreatedAt
             };
         }
 
