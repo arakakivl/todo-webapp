@@ -46,7 +46,7 @@ async function putItemInItemsArea(items) {
     }
 
     itemsArea.style.textAlign = 'left';
-    for (let i = 0; i < items.length; i++) {
+    for (let i = items.length - 1; i >= 0; i--) {
         let item = items[i];
 
         // Declaring todoItem html element
@@ -176,13 +176,13 @@ function formatDate(date) {
         day = date.getDate();
     }
 
-    month = "0" + (date.getMonth() + 1);
     if ((date.getMonth() + 1).toString().length == 1) {
+        month = "0" + (date.getMonth() + 1);
     } else {
         month = date.getMonth() + 1;
     }
 
-    return day + "/" + month;
+    return day.toString() + "/" + month.toString();
 }
 
 function sleep(ms) {
@@ -276,6 +276,7 @@ async function postNewItem() {
                 throw Error(); 
             } else { 
                 closeModal();
+                location.reload();
             }
         })
         .catch(y => {
@@ -300,6 +301,7 @@ async function putItem(id) {
             closeModal();
             let oldBtnWithEventListener = document.getElementById('btnPutItem');
             oldBtnWithEventListener.replaceWith(oldBtnWithEventListener.cloneNode(true));
+            location.reload();
         }
     })
     .catch(y => {

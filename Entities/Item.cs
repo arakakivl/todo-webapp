@@ -1,3 +1,5 @@
+using System;
+
 namespace ToDoApi.Entities
 {
     public record Item
@@ -9,7 +11,7 @@ namespace ToDoApi.Entities
 
         public bool IsComplete { get; init; }
 
-        public DateTime CompleteUntil { get; init; }
-        public DateTime CreatedAt { get; init; }
+        public DateTimeOffset CompleteUntil { get; init; }
+        public DateTimeOffset CreatedAt { get; init; }
     }
 }

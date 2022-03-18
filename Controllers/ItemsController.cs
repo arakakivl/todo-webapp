@@ -25,7 +25,7 @@ namespace ToDoApi.Controllers
                 Title = item.Title,
                 Description = item.Description,
                 IsComplete = false,
-                CompleteUntil = item.CompleteUntil,
+                CompleteUntil = item.CompleteUntil.AddHours(3),
                 CreatedAt = DateTime.Today
             };
 
@@ -77,7 +77,7 @@ namespace ToDoApi.Controllers
             {
                 Title = updatedInfo.Title,
                 Description = updatedInfo.Description,
-                CompleteUntil = updatedInfo.CompleteUntil,
+                CompleteUntil = updatedInfo.CompleteUntil.AddHours(3),
             };
 
             _repo.Update(id, updated);

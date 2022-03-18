@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ToDoApi.Dtos.Item
@@ -11,7 +12,7 @@ namespace ToDoApi.Dtos.Item
 
         public bool IsComplete { get; init; }
 
-        public DateTime CompleteUntil { get; init; }
-        public DateTime CreatedAt { get; init; }
+        public DateTimeOffset CompleteUntil { get; init; }
+        public DateTimeOffset CreatedAt { get; init; }
     }
 }
