@@ -85,8 +85,9 @@ async function putItemInItemsArea(items) {
 
         desc.innerHTML = descriptionn;
 
-        created.innerHTML = "Criado em: " + item.createdAt;
-        completeUntil.innerHTML = "Completar até: " + item.completeUntil;
+        // Dates
+        created.innerHTML = "Criado em: " + formatDate(new Date(item.createdAt));
+        completeUntil.innerHTML = "Completar até: " + formatDate(new Date(item.completeUntil));
 
         checkInput.type = 'checkbox';
 
@@ -115,8 +116,7 @@ async function putItemInItemsArea(items) {
             }
             else {
                 title.style.textDecoration = '';
-                completeUntil.innerHTML =
-                completeUntil.innerHTML = "Completar até: " + (new Date(item.completeUntil)).getDay;
+                completeUntil.innerHTML = "Completar até: " + formatDate(new Date(item.completeUntil));
                 
                 if ($('body > nav > ul > li')[2].style.color == 'red') {
                     await removeToDo(todoContainer);
@@ -164,6 +164,25 @@ async function putItemInItemsArea(items) {
 
         itemsArea.appendChild(todoContainer);
     }
+}
+
+function formatDate(date) {
+    let day;
+    let month;
+
+    if (date.getDate().toString().length == 1) {
+        day = "0" + date.getDate();
+    } else {
+        day = date.getDate();
+    }
+
+    month = "0" + (date.getMonth() + 1);
+    if ((date.getMonth() + 1).toString().length == 1) {
+    } else {
+        month = date.getMonth() + 1;
+    }
+
+    return day + "/" + month;
 }
 
 function sleep(ms) {
@@ -240,28 +259,29 @@ function returnItemFromForm() {
         return item;
     } catch {
         alert("Houve um erro. Verifique se a data está preenchida corretamente.");
-        return;
+        return "null";
     }
 }
 
 async function postNewItem() {
     let item = returnItemFromForm();
-
-    await fetch("/api/items", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-    })
-    .then(x => {
-        if (!x.ok) { 
-            throw Error(); 
-        } else { 
-            closeModal(); 
-        }
-    })
-    .catch(y => {
-        alert("Houve algum erro. Por favor, verifique se o título está devidamente preenchido ou se não é muito grande.");
-    });
+    if (item != "null") {
+        await fetch("/api/items", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(item)
+        })
+        .then(x => {
+            if (!x.ok) { 
+                throw Error(); 
+            } else { 
+                closeModal();
+            }
+        })
+        .catch(y => {
+            alert("Houve algum erro. Por favor, verifique se o título está devidamente preenchido ou se não é muito grande.");
+        });
+    }
 }
 
 async function putItem(id) {
