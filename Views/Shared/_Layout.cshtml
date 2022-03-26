@@ -20,7 +20,7 @@
 
         <nav>
             <ul>
-                <li onclick="getAllItems()">Todos</li>
+                <li onclick="getAllItems()" class="selectedFilter">Todos</li>
                 <li onclick="getUncompletedItems()">Incompletos</li>
                 <li onclick="getCompletedItems()">Completos</li>
             </ul>
@@ -33,5 +33,7 @@
         <button id="newItem" onclick="postItemModal()">&plus;</button>
 
         <script src="~/js/index.js"></script>
+        <script src="~/js/auxiliar.js"></script>
+        <script src="~/js/modal.js"></script>
     </body>
 </html>

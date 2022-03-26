@@ -35,7 +35,7 @@ namespace ToDoApi.Controllers
 
         // GET => /api/items/id
         [HttpGet("{id}")]
-        public ActionResult<ItemDto> Get(Guid id)
+        public ActionResult<ItemDto> Get([FromRoute] Guid id)
         {
             var finded = _repo.Get(id);
             if (finded is null)
@@ -67,7 +67,7 @@ namespace ToDoApi.Controllers
 
         // PUT => /api/items/id
         [HttpPut("{id}")]
-        public ActionResult Put(Guid id, UpdateItemDto updatedInfo)
+        public ActionResult Put([FromRoute] Guid id, UpdateItemDto updatedInfo)
         {
             var toUpdate = _repo.Get(id);
             if (toUpdate is null)
@@ -86,7 +86,7 @@ namespace ToDoApi.Controllers
 
         // Delete => /api/items/id
         [HttpDelete("{id}")]
-        public ActionResult Delete(Guid id)
+        public ActionResult Delete([FromRoute] Guid id)
         {
             var toUpdate = _repo.Get(id);
             if (toUpdate is null)
@@ -98,7 +98,7 @@ namespace ToDoApi.Controllers
 
         // Patch -> /api/items/id/check
         [HttpPatch("{id}/check")]
-        public ActionResult PatchCheckItem(Guid id, CheckItemDto checkItem)
+        public ActionResult PatchCheckItem([FromRoute] Guid id, CheckItemDto checkItem)
         {
             var toCheckOrUncheck = _repo.Get(id);
             if (toCheckOrUncheck is null)

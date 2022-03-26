@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    padding: 10px;
+    padding: 20px;
 }
 
 main {
@@ -31,6 +31,8 @@ body > nav {
     display: flex;
     justify-content: center;
     width: 100%;
+
+    margin-top: 20px;
 }
 
 body > nav > ul > li {
@@ -46,6 +48,11 @@ body > nav > ul {
     display: flex;
     gap: 15px;
     list-style-type: none;
+}
+
+.selectedFilter {
+    color: red;
+    font-weight: bold;
 }
 
 @media only screen and (min-width: 768px) {

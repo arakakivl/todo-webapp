@@ -1,0 +1,15 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+      "noImplicitAny": false,
+      "noEmitOnError": true,
+      "removeComments": false,
+      "sourceMap": true,
+      "target": "es5",
+      "outDir": "js",
+      "lib":["ES2015", "dom"]
+    },
+    "include": [
+      "ts/"
+    ]
+}
