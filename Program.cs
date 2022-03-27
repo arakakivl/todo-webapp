@@ -1,8 +1,21 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
 using ToDoApi.Repositories;
+using ToDoApi.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IItemsRepository, InMemItemsRepository>();
+BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
+
+builder.Services.AddSingleton<IMongoClient>(provider => {
+    var settings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+    return new MongoClient(settings.ConnectionString);
+});
+
+builder.Services.AddSingleton<IItemsRepository, MongoItemsRepository>();
 builder.Services.AddMvc();
 
 builder.Services.AddEndpointsApiExplorer();
