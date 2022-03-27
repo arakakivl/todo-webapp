@@ -4,12 +4,12 @@ namespace ToDoApi.Repositories
 {
     public interface IItemsRepository
     {
-        void Add(Item item);
+        Task AddAsync(Item item);
 
-        Item? Get(Guid id);
-        IEnumerable<Item> GetAll();
+        Task<Item?> GetAsync(Guid id);
+        Task<IEnumerable<Item>> GetAllAsync();
 
-        void Update(Guid id, Item item);
-        void Delete(Guid id);
+        Task UpdateAsync(Guid id, Item item);
+        Task DeleteAsync(Guid id);
     }
 }

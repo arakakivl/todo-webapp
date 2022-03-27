@@ -19,33 +19,33 @@ namespace ToDoApi.Repositories
             itemsCollection = database.GetCollection<Item>(collectionName);
         }
 
-        public void Add(Item toAdd)
+        public async Task AddAsync(Item toAdd)
         {
-            itemsCollection.InsertOne(toAdd);
+            await itemsCollection.InsertOneAsync(toAdd);
         }
 
-        public Item? Get(Guid id)
+        public async Task<Item?> GetAsync(Guid id)
         {
             // return GetAll().First(x => x.Id == id);
             var filter = filterBuilder.Eq(item => item.Id, id);
-            return itemsCollection.Find(filter).SingleOrDefault();
+            return (await itemsCollection.FindAsync(filter)).SingleOrDefault();
         }
 
-        public IEnumerable<Item> GetAll()
+        public async Task<IEnumerable<Item>> GetAllAsync()
         {
-            return itemsCollection.Find(new BsonDocument()).ToList();
+            return (await itemsCollection.FindAsync(new BsonDocument())).ToList();
         }
 
-        public void Update(Guid id, Item item)
-        {
-            var filter = filterBuilder.Eq(item => item.Id, id);
-            itemsCollection.ReplaceOne(filter, item);
-        }
-
-        public void Delete(Guid id)
+        public async Task UpdateAsync(Guid id, Item item)
         {
             var filter = filterBuilder.Eq(item => item.Id, id);
-            itemsCollection.DeleteOne(filter);
+            await itemsCollection.ReplaceOneAsync(filter, item);
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var filter = filterBuilder.Eq(item => item.Id, id);
+            await itemsCollection.DeleteOneAsync(filter);
         }
     }
 }

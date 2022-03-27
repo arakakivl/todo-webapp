@@ -17,7 +17,7 @@ namespace ToDoApi.Controllers
 
         // POST => /api/items
         [HttpPost]
-        public ActionResult<ItemDto> Create(CreateItemDto item)
+        public async Task<ActionResult<ItemDto>> CreateAsync(CreateItemDto item)
         {
             var toAdd = new Item()
             {
@@ -29,15 +29,15 @@ namespace ToDoApi.Controllers
                 CreatedAt = DateTime.Today
             };
 
-            _repo.Add(toAdd);
-            return CreatedAtAction(nameof(Get), new { id = toAdd.Id }, toAdd.AsDto());
+            await _repo.AddAsync(toAdd);
+            return CreatedAtAction(nameof(GetAsync), new { id = toAdd.Id }, toAdd.AsDto());
         }
 
         // GET => /api/items/id
         [HttpGet("{id}")]
-        public ActionResult<ItemDto> Get([FromRoute] Guid id)
+        public async Task<ActionResult<ItemDto>> GetAsync([FromRoute] Guid id)
         {
-            var finded = _repo.Get(id);
+            var finded = await _repo.GetAsync(id);
             if (finded is null)
                 return NotFound();
             
@@ -46,30 +46,30 @@ namespace ToDoApi.Controllers
 
         // GET => /api/items
         [HttpGet]
-        public IEnumerable<ItemDto> GetAll()
+        public async Task<IEnumerable<ItemDto>> GetAllAsync()
         {
-            return _repo.GetAll().Select(x => x.AsDto());
+            return (await _repo.GetAllAsync()).Select(x => x.AsDto());
         }
 
         // GET => /api/items/uncompleted
         [HttpGet("uncompleted")]
-        public IEnumerable<ItemDto> GetUncompleted()
+        public async Task<IEnumerable<ItemDto>> GetUncompletedAsync()
         {
-            return _repo.GetAll().Select(x => x.AsDto()).ToList().FindAll(x => !x.IsComplete);
+            return (await _repo.GetAllAsync()).Select(x => x.AsDto()).ToList().FindAll(x => !x.IsComplete);
         }
 
         // GET => /api/items/completed
         [HttpGet("completed")]
-        public IEnumerable<ItemDto> GetCompleted()
+        public async Task<IEnumerable<ItemDto>> GetCompletedAsync()
         {
-            return _repo.GetAll().Select(x => x.AsDto()).ToList().FindAll(x => x.IsComplete);
+            return (await _repo.GetAllAsync()).Select(x => x.AsDto()).ToList().FindAll(x => x.IsComplete);
         }
 
         // PUT => /api/items/id
         [HttpPut("{id}")]
-        public ActionResult Put([FromRoute] Guid id, UpdateItemDto updatedInfo)
+        public async Task<ActionResult> PutAsync([FromRoute] Guid id, UpdateItemDto updatedInfo)
         {
-            var toUpdate = _repo.Get(id);
+            var toUpdate = await _repo.GetAsync(id);
             if (toUpdate is null)
                 return NotFound();
 
@@ -80,27 +80,27 @@ namespace ToDoApi.Controllers
                 CompleteUntil = updatedInfo.CompleteUntil.AddHours(3),
             };
 
-            _repo.Update(id, updated);
+            await _repo.UpdateAsync(id, updated);
             return NoContent();
         }
 
         // Delete => /api/items/id
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] Guid id)
+        public async Task<ActionResult> DeleteAsync([FromRoute] Guid id)
         {
-            var toUpdate = _repo.Get(id);
+            var toUpdate = await _repo.GetAsync(id);
             if (toUpdate is null)
                 return NotFound();
             
-            _repo.Delete(id);
+            await _repo.DeleteAsync(id);
             return NoContent();
         }
 
         // Patch -> /api/items/id/check
         [HttpPatch("{id}/check")]
-        public ActionResult PatchCheckItem([FromRoute] Guid id, CheckItemDto checkItem)
+        public async Task<ActionResult> PatchCheckItemAsync([FromRoute] Guid id, CheckItemDto checkItem)
         {
-            var toCheckOrUncheck = _repo.Get(id);
+            var toCheckOrUncheck = await _repo.GetAsync(id);
             if (toCheckOrUncheck is null)
                 return NotFound();
             
@@ -109,7 +109,7 @@ namespace ToDoApi.Controllers
                 IsComplete = checkItem.IsComplete
             };
 
-            _repo.Update(id, itemTo);
+            await _repo.UpdateAsync(id, itemTo);
             return NoContent();
         }
     }

@@ -14,19 +14,30 @@ namespace ToDoApi.Repositories
             new Item() { Id = Guid.NewGuid(), Title = "Isso aqui é um teste, Por favor, xxx!", Description = "Isso é um teste, por favor desconsidere o tamanho dessa descrição, ela foi feita para ser enorme mesmo. Então, lá vamos nós!", IsComplete = true, CompleteUntil = DateTime.Today.AddDays(-3), CreatedAt = DateTime.Today.AddDays(-5) }    
         };
 
-        public void Add(Item item) =>
+        public async Task AddAsync(Item item)
+        {
             database.Add(item);
+            await Task.CompletedTask;
+        }
 
-        public Item? Get(Guid id) =>
-            database.Find(x => x.Id == id);
+        public async Task<Item?> GetAsync(Guid id) =>
+            await Task.FromResult(database.Find(x => x.Id == id));
 
-        public IEnumerable<Item> GetAll() =>
-            database;
+        public async Task<IEnumerable<Item>> GetAllAsync() =>
+            await Task.FromResult(database);
 
-        public void Update(Guid id, Item item) =>
+        public async Task UpdateAsync(Guid id, Item item)
+        {
             database[database.FindIndex(x => x.Id == id)] = item;
+            await Task.CompletedTask;
+        }
+            
 
-        public void Delete(Guid id) =>
+        public async Task DeleteAsync(Guid id)
+        {
             database.RemoveAt(database.FindIndex(x => x.Id == id));
+            await Task.CompletedTask;
+        }
+            
     }
 }
