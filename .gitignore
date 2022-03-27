@@ -452,3 +452,10 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Ignorando arquivos compilados pelo TypeScript
+wwwroot/js/**/*.js
+wwwroot/js/**/*.map
+
+# Customizado
+.vscode
