@@ -3,9 +3,10 @@ Uma API que ajuda a você organizar as tão "amadas" tarefas e responsabilidades
 
 O front-end é feito em **TypeScript** e o back-end é construído em **.NET** + banco de dados **mongo**.
 
-## Imagens da Aplicação
+## Como executar (pelo Docker)
+**Requisitos**
+ - Docker Engine
 
-## Como Usar
 Faça o download do repositório ou execute `git clone` para cloná-lo para sua máquina.
 
 ```
