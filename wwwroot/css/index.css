@@ -61,6 +61,7 @@
 }
 
 .todo-main-desc {
+    margin-top: 10px;
     font-size: 0.8rem;
 }
 
@@ -71,9 +72,10 @@
 .todo-main-buttons {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 7px;
 
+    margin-top: 10px;
     height: 50px;
 }
 
