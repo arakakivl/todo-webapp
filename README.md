@@ -34,3 +34,8 @@ docker run -it --rm -p 8080:80 -e MongoDbSettings:Host=todo-api-data --network=t
 ```
 
 Acesse `http://localhost:8080`, **e pronto!**
+
+## Obrigado!
+O código ainda é sujeito a alterações!
+
+![rurouni gif](more/rurouni.gif)
