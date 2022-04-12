@@ -1,0 +1,25 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  todoapi:
+    image: todoapi
+    build:
+      context: .
+      dockerfile: src/Todo.Api/Dockerfile
+    ports:
+      - 5223:5223
+    environment:
+      - MongoDbSettings:Host=db
+  
+  db:
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodbdata:/data/db
+    container_name: db
+
+volumes:
+  mongodbdata: {}

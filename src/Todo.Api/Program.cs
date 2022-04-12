@@ -18,7 +18,7 @@ builder.Services.AddSingleton<IMongoClient>(provider => {
     return new MongoClient(settings.ConnectionString);
 });
 
-builder.Services.AddSingleton<IItemsRepository, InMemItemsRepository>();
+builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
 builder.Services.AddSingleton<IItemsService, ItemsService>();
 builder.Services.AddControllers(options => {
     options.SuppressAsyncSuffixInActionNames = false;
@@ -30,11 +30,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

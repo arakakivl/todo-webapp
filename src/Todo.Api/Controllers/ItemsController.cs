@@ -19,7 +19,7 @@ public class ItemsController : ControllerBase
     public async Task<ActionResult<ItemViewModel>> CreateAsync(CreateItemModel item)
     {
         var itemId = await _service.AddAsync(item);
-        return CreatedAtAction(nameof(GetAsync), new { id = itemId }, _service.GetAsync(itemId));
+        return CreatedAtAction(nameof(GetAsync), new { id = itemId }, await _service.GetAsync(itemId));
     }
 
     // GET => /api/items/id
