@@ -76,7 +76,7 @@ public class ItemsController : ControllerBase
         return NoContent();
     }
 
-    // Patch => /api/items/id/check
+    // Patch => /api/items/id/
     [HttpPatch("{id}")]
     public async Task<ActionResult> CheckItemAsync([FromRoute] Guid id)
     {

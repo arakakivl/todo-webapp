@@ -24,7 +24,7 @@ public class ItemsService : IItemsService
             Description = item.Description,
             IsComplete = false,
             CreatedAt = DateTime.Today,
-            CompleteUntil = item.CompleteUntil
+            CompleteUntil = item.CompleteUntil.AddHours(3)
         };
 
         await _repository.AddAsync(toAdd);

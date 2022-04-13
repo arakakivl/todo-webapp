@@ -20,22 +20,13 @@ builder.Services.AddSingleton<IMongoClient>(provider => {
 
 builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
 builder.Services.AddSingleton<IItemsService, ItemsService>();
-builder.Services.AddControllers(options => {
+builder.Services.AddControllersWithViews(options => {
     options.SuppressAsyncSuffixInActionNames = false;
 });
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

@@ -454,8 +454,9 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 # Ignorando arquivos compilados pelo TypeScript
-wwwroot/js/**/*.js
-wwwroot/js/**/*.map
+*.js
+*.map
 
 # Customizado
 .vscode
+*.bak
