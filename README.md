@@ -7,43 +7,47 @@ O front-end é feito em **TypeScript** e o back-end é construído em **.NET** +
 Faça o download do repositório ou execute `git clone` para cloná-lo para sua máquina.
 
 ```
-git clone https://github.com/arakakiv/todo-api
+git clone https://github.com/arakakiv/todo-webapp
 ```
 
-Vá para a pasta baixada ou clonada, e depois para a pasta principal do webapp
+Vá para a pasta clonada
 
 ```
-cd todo-api
-cd todo-api
+cd todo-webapp
 ```
 
 ## Executando pelo Docker
 **Requisitos**:
  - Docker Engine
+ - Docker Compose
 
-Use o comando `docker build` para **buildar** o `Dockerfile` e crie uma conexão que terá os containers do banco de dados mongo e da aplicação em si:
-
-```
-docker build -t todo-api:v1 .
-docker network create todo-api-network              
-```
-
-Finalmente, execute o container do banco de dados e depois o container da aplicação:
+Use o comando `docker-compose up --build` para **buildar** e **executar** todas as imagens necessárias.
 
 ```
-docker run -d --rm --name todo-api-data -p 27017:27017 -v todo-api-data:/data/db --network=todo-api-network mongo:4.4
-docker run -it --rm -p 8080:80 -e MongoDbSettings:Host=todo-api-data --network=todo-api-network todo-api:v1
+docker-compose up --build             
 ```
 
-Acesse `http://localhost:8080`, **e pronto!**
+Finalmente, **navegue até http://localhost:5223!**
 
 ## Executando pela dotnet cli
 **Requisitos**:
- - .NET SDK 6+
+ - .NET SDK 6.x
  - NodeJS e npm
 
-Instale as dependências com o seguinte comando:
+Primeiramente, vá até `Program.cs`, na pasta src/Todo.WebApp
 ```
+cd src/Todo.WebApp
+nano Program.cs // Abra com o seu editor de texto/código favorito
+```
+Troque `ItemsRepository` por `InMemItemsRepository`
+```
+// builder.Services.AddSingleton<IItemsRepository, ItemsRepository>(); (estava assim)
+builder.Services.AddSingleton<IItemsRepository, InMemItemsRepository>(); // Ficará assim!
+```
+
+Instale as dependências com os seguintes comando:
+```
+dotnet restore
 npm install
 ```
 Por fim, execute o seguinte comando para executar a aplicação:
