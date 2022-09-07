@@ -5,8 +5,10 @@ public record CreateItemModel
 {
     [Required]
     [MaxLength(50)]
-    public string? Title { get; init; }
-    public string? Description { get; init; }
+    public string Title { get; init; } = null!;
+
+    [Required]
+    public string Description { get; init; } = null!;
 
     [Required]
     public DateTimeOffset CompleteUntil { get; init; }

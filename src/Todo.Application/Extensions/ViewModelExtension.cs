@@ -4,7 +4,7 @@ using Todo.Core.Entities;
 namespace Todo.Application.Extensions;
 public static class ItemDtoExtension
 {
-    public static ItemViewModel? AsViewModel(this Item item)
+    public static ItemViewModel AsViewModel(this Item item)
     {
         return new ItemViewModel()
         {

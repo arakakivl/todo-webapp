@@ -7,9 +7,9 @@ public interface IItemsService
 {
     Task<Guid> AddAsync(CreateItemModel item);
 
-    Task<IEnumerable<ItemViewModel?>> GetAllAsync();
-    Task<IEnumerable<ItemViewModel?>> GetUncompletedAsync();
-    Task<IEnumerable<ItemViewModel?>> GetCompletedAsync();
+    Task<IEnumerable<ItemViewModel>> GetAllAsync();
+    Task<IEnumerable<ItemViewModel>> GetUncompletedAsync();
+    Task<IEnumerable<ItemViewModel>> GetCompletedAsync();
 
     Task<ItemViewModel?> GetAsync(Guid id);
 

@@ -19,11 +19,9 @@ public class ItemsService : IItemsService
     {
         Item toAdd = new Item() 
         {
-            Id = Guid.NewGuid(),
             Title = item.Title,
             Description = item.Description,
             IsComplete = false,
-            CreatedAt = DateTime.Today,
             CompleteUntil = item.CompleteUntil.AddHours(3)
         };
 
@@ -31,17 +29,17 @@ public class ItemsService : IItemsService
         return toAdd.Id;
     }
 
-    public async Task<IEnumerable<ItemViewModel?>> GetAllAsync()
+    public async Task<IEnumerable<ItemViewModel>> GetAllAsync()
     {
         return (await _repository.GetAllAsync()).Select(x => x.AsViewModel());
     }
 
-    public async Task<IEnumerable<ItemViewModel?>> GetUncompletedAsync()
+    public async Task<IEnumerable<ItemViewModel>> GetUncompletedAsync()
     {
         return (await _repository.GetAllAsync()).Where(x => !x.IsComplete).Select(x => x.AsViewModel());
     }
 
-    public async Task<IEnumerable<ItemViewModel?>> GetCompletedAsync()
+    public async Task<IEnumerable<ItemViewModel>> GetCompletedAsync()
     {
         return (await _repository.GetAllAsync()).Where(x => x.IsComplete).Select(x => x.AsViewModel());
     }
