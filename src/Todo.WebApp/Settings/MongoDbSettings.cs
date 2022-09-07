@@ -1,4 +1,4 @@
-namespace Todo.Api.Settings;
+namespace Todo.WebApp.Settings;
 public class MongoDbSettings
 {
     public string? Host { get; set; }

@@ -3,7 +3,7 @@ using Todo.Application.InputModels;
 using Todo.Application.Services;
 using Todo.Application.ViewModels;
 
-namespace Todo.Api.Controllers;
+namespace Todo.WebApp.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class ItemsController : ControllerBase

@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
-using Todo.Api.Settings;
+using Todo.WebApp.Settings;
 using Todo.Application.Services;
 using Todo.Core.Interfaces;
 using Todo.Infrastructure.Repositories;

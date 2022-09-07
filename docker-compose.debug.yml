@@ -7,7 +7,7 @@ services:
     image: todoapi
     build:
       context: .
-      dockerfile: src/Todo.Api/Dockerfile
+      dockerfile: src/Todo.WebApp/Dockerfile
     ports:
       - 5223:5223
     environment:
