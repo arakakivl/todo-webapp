@@ -20,7 +20,7 @@ function formatDate(date : Date) : string {
     if ((date.getMonth() + 1).toString().length == 1) {
         month = "0" + (date.getMonth() + 1);
     } else {
-        month = date.getMonth().toString() + 1;
+        month = (date.getMonth() + 1).toString();
     }
 
     return (day + "/" + month);

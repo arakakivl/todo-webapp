@@ -1,3 +1,4 @@
+using System;
 using Todo.Core.Entities;
 using Todo.Core.Interfaces;
 
@@ -7,12 +8,12 @@ public class InMemItemsRepository : IItemsRepository
 {
     private readonly List<Item> _database = new()
     {
-        new Item() { Title = "Estudar matemática", Description = "Ler até o volume 3.", IsComplete = false, CompleteUntil = DateTime.Today.AddDays(5), CreatedAt = DateTime.Today.AddDays(-5) },
-        new Item() { Title = "Exercícios Físicos", IsComplete = true, CompleteUntil = DateTime.Today },
-        new Item() { Title = "Reunião do projeto principal", Description = "Não esquecer de ir de roupa social!", IsComplete = false, CompleteUntil = DateTime.Today, CreatedAt = DateTime.Today.AddDays(-7) },
-        new Item() { Title = "Consumir HTTP Requests do Freelance", Description = "Cliente: Alex", IsComplete = false, CompleteUntil = DateTime.Today.AddDays(2)},
-        new Item() { Title = "Almoço com os amigos", Description = "Eles são tão chatos que isso é considerado uma tarefa rs rs", IsComplete = false, CompleteUntil = DateTime.Today, CreatedAt = DateTime.Today.AddDays(-3) },
-        new Item() { Description = "Isso é um teste, por favor desconsidere o tamanho dessa descrição, ela foi feita para ser enorme mesmo. Então, lá vamos nós!", IsComplete = true, CompleteUntil = DateTime.Today.AddDays(-3), CreatedAt = DateTime.Today.AddDays(-5) }    
+        new Item() { Title = "Estudar matemática", Description = "Ler até o volume 3.", IsComplete = false, CompleteUntil = DateTimeOffset.UtcNow.AddDays(5), CreatedAt = DateTimeOffset.UtcNow.AddDays(-5) },
+        new Item() { Title = "Exercícios Físicos", IsComplete = true, CompleteUntil = DateTimeOffset.UtcNow },
+        new Item() { Title = "Reunião do projeto principal", Description = "Não esquecer de ir de roupa social!", IsComplete = false, CompleteUntil = DateTimeOffset.UtcNow, CreatedAt = DateTimeOffset.UtcNow.AddDays(-7) },
+        new Item() { Title = "Consumir HTTP Requests do Freelance", Description = "Cliente: Alex", IsComplete = false, CompleteUntil = DateTimeOffset.UtcNow.AddDays(2) },
+        new Item() { Title = "Almoço com os amigos", Description = "Eles são tão chatos que isso é considerado uma tarefa rs rs", IsComplete = false, CompleteUntil = DateTimeOffset.UtcNow, CreatedAt = DateTimeOffset.UtcNow.AddDays(-3) },
+        new Item() { Description = "Isso é um teste, por favor desconsidere o tamanho dessa descrição, ela foi feita para ser enorme mesmo. Então, lá vamos nós!", IsComplete = true, CompleteUntil = DateTimeOffset.UtcNow.AddDays(-3), CreatedAt = DateTimeOffset.UtcNow.AddDays(-5) }    
     };
 
     public async Task AddAsync(Item item)

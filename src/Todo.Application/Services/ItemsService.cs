@@ -22,7 +22,7 @@ public class ItemsService : IItemsService
             Title = item.Title,
             Description = item.Description,
             IsComplete = false,
-            CompleteUntil = item.CompleteUntil.AddHours(3)
+            CompleteUntil = item.CompleteUntil.AddDays(1)
         };
 
         await _repository.AddAsync(toAdd);

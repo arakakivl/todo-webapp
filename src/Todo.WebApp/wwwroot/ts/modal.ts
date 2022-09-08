@@ -7,7 +7,8 @@ function putItemModal(item : Item) {
     modalInputTitle.value = item.title;
     modalInputDescription.value = item.description;
 
-    modalInputDate.valueAsDate = new Date(item.completeUntil);
+    let date = new Date(item.completeUntil);
+    modalInputDate.valueAsDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
 
     showModal();
 
