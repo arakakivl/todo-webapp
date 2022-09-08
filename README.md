@@ -1,5 +1,5 @@
-# ToDo-Api
-Uma API que ajuda a você organizar as tão "amadas" tarefas e responsabilidades!
+# ToDo-WebApp
+Aplicação web API + MVC que ajuda a você organizar as tão "amadas" tarefas e responsabilidades!
 
 O front-end é feito em **TypeScript** e o back-end é construído em **.NET** + banco de dados **mongo**.
 
@@ -58,5 +58,3 @@ dotnet run
 
 ## Obrigado!
 O código ainda é sujeito a alterações!
-
-![rurouni gif](more/rurouni.gif)
