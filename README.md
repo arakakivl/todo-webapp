@@ -1,18 +1,10 @@
 # ToDo-WebApp
 .NET backend with a nosql database (mongodb) and typescript as the mainly language to the frontend.
 
-## Fazendo download ou clonando o repositóio
-
 ## Running
 First, clone the repository.
 ```
 git clone https://github.com/arakakiv/todo-webapp
-```
-
-Vá para a pasta clonada
-
-```
-cd todo-webapp
 ```
 
 ### Running within Docker containers
@@ -28,8 +20,8 @@ docker-compose up --build
 
 Finally, navigate to the specified port.
 
-## Running by Docker CLI
-**Requisitos**:
+### Running by Docker CLI
+**Requirements**:
  - .NET SDK 6.x
  - NodeJS, npm and typescript
 
