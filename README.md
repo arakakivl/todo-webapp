@@ -1,11 +1,10 @@
 # ToDo-WebApp
-Aplicação web API + MVC que ajuda a você organizar as tão "amadas" tarefas e responsabilidades!
-
-O front-end é feito em **TypeScript** e o back-end é construído em **.NET** + banco de dados **mongo**.
+.NET backend with a nosql database (mongodb) and typescript as the mainly language to the frontend.
 
 ## Fazendo download ou clonando o repositóio
-Faça o download do repositório ou execute `git clone` para cloná-lo para sua máquina.
 
+## Running
+First, clone the repository.
 ```
 git clone https://github.com/arakakiv/todo-webapp
 ```
@@ -16,45 +15,41 @@ Vá para a pasta clonada
 cd todo-webapp
 ```
 
-## Executando pelo Docker
-**Requisitos**:
+### Running within Docker containers
+**Requirements**:
  - Docker Engine
  - Docker Compose
 
-Use o comando `docker-compose up --build` para **buildar** e **executar** todas as imagens necessárias.
+Just build and run the app with the following command:
 
 ```
 docker-compose up --build             
 ```
 
-Finalmente, **navegue até http://localhost:5223!**
+Finally, navigate to the specified port.
 
-## Executando pela dotnet cli
+## Running by Docker CLI
 **Requisitos**:
  - .NET SDK 6.x
- - NodeJS e npm
+ - NodeJS, npm and typescript
 
-Primeiramente, vá até `Program.cs`, na pasta src/Todo.WebApp
+First of all, go to `Program.cs` and update the database scheme to "In memory database".
 ```
 cd src/Todo.WebApp
 nano Program.cs // Abra com o seu editor de texto/código favorito
 ```
-Troque `ItemsRepository` por `InMemItemsRepository`
+Change `ItemsRepository` by `InMemItemsRepository`
 ```
-// builder.Services.AddSingleton<IItemsRepository, ItemsRepository>(); (estava assim)
-builder.Services.AddSingleton<IItemsRepository, InMemItemsRepository>(); // Ficará assim!
+// builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
+builder.Services.AddSingleton<IItemsRepository, InMemItemsRepository>();
 ```
 
-Instale as dependências com os seguintes comando:
+Restore the dependencies with the following commands:
 ```
 dotnet restore
 npm install
 ```
-Por fim, execute o seguinte comando para executar a aplicação:
+Finally, execute the app with `dotnet run`:
 ```
 dotnet run
 ```
-**Detalhe:** Os dados não serão salvos, já que não há a execução do banco de dados, e sim apenas do aplicativo.
-
-## Obrigado!
-O código ainda é sujeito a alterações!
