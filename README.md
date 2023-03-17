@@ -1,5 +1,5 @@
 # ToDo-WebApp
-.NET backend with a nosql database (mongodb) and typescript as the mainly language to the frontend.
+.NET backend with a nosql database (mongodb) and typescript as the mainly frontend language.
 
 ## Running
 First, clone the repository.
