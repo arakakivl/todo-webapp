@@ -20,7 +20,7 @@ docker-compose up --build
 
 Finally, navigate to the specified port.
 
-### Running by Docker CLI
+### Running by dotnet CLI
 **Requirements**:
  - .NET SDK 6.x
  - NodeJS, npm and typescript
@@ -28,7 +28,7 @@ Finally, navigate to the specified port.
 First of all, go to `Program.cs` and update the database scheme to "In memory database".
 ```
 cd src/Todo.WebApp
-nano Program.cs // Abra com o seu editor de texto/código favorito
+nano Program.cs // Open it with your favorite text editor
 ```
 Change `ItemsRepository` by `InMemItemsRepository`
 ```
